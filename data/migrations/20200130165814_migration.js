@@ -33,8 +33,8 @@ exports.up = function(knex) {
     .notNullable()
     .references('id')
     .inTable('food_truck')
-    .onUpdate()
-    .onDelete()
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
     tbl
     .integer('rest_id')
     .unsigned()
@@ -98,5 +98,11 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+  .dropTableIfExists('users')
+  .dropTableIfExists('rating')
+  .dropTableIfExists('restaurant')
+  .dropTableIfExists('food_truck')
+  .dropTableIfExists('user_dash')
+  .dropTableIfExists('general_dash')
 };
