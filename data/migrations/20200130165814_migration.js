@@ -45,6 +45,54 @@ exports.up = function(knex) {
     .onDelete('CASCADE')
 
   })
+
+  .createTable('restaurant', tbl => {
+    tbl.increments();
+    tbl
+    .string('name')
+    .string('city')
+    .string('type')
+    
+  })
+
+  .createTable('food_truck', tbl => {
+    tbl.increments();
+    tbl
+    .string('name')
+    .string('type')
+  })
+
+  .createTable('rating', tbl => {
+    tbl.increments();
+    tbl
+    .integer('rating')
+    .string('comment')
+    tbl
+    .integer('user_id')
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('users')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+    tbl
+    .integer('ft_id')
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('food_truck')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+    tbl
+    .integer('rest_id')
+    .unsigned()
+    .notNullable()
+    .references('id')
+    .inTable('restaurant')
+    .onUpdate('CASCADE')
+    .onDelete('CASCADE')
+
+  })
   
 
 };
