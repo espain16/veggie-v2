@@ -2,25 +2,25 @@
 exports.up = function(knex,) {
   return knex.schema
   .createTable('users', tbl => {
-    tbl.increments();
+    tbl.increments('id').primary();
     tbl.string('username', 128).unique().notNullable()
     tbl.string('password', 40).unique().notNullable()
   })
 
   .createTable('user_dash', tbl => {
-    tbl.increments();
-    tbl.integer('user_id').unsigned().notNullable().references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
+    tbl.increments('id').primary();
+    tbl.foreign('user_id').references('users.id')
   })
 
   .createTable('general_dash', tbl => {
-    tbl.increments();
-    tbl.integer('ft_id').unsigned().notNullable().references('id').inTable('food_truck').onUpdate('CASCADE').onDelete('CASCADE')
-    tbl.integer('rest_id').unsigned().notNullable().references('id').inTable('restaurant').onUpdate('CASCADE').onDelete('CASCADE')
+    tbl.increments('id').primary();
+    tbl.foreign('ft_id').references('food_truck.id')
+    tbl.foreign('rest_id').references('restaurant.id')
 
   })
 
   .createTable('restaurant', tbl => {
-    tbl.increments();
+    tbl.increments('id').primary();
     tbl.string('name', 255).notNullable()
     tbl.string('city', 255).notNullable()
     tbl.string('type', 255).notNullable()
@@ -28,18 +28,18 @@ exports.up = function(knex,) {
   })
 
   .createTable('food_truck', tbl => {
-    tbl.increments();
+    tbl.increments('id').primary();
     tbl.string('name', 255).notNullable()
     tbl.string('type', 255).notNullable()
   })
 
   .createTable('rating', tbl => {
-    tbl.increments();
+    tbl.increments('id').primary();
     tbl.integer('rating')
     tbl.string('comment')
-    tbl.integer('user_id').unsigned().notNullable().references('id').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
-    tbl.integer('ft_id').unsigned().notNullable().references('id').inTable('food_truck').onUpdate('CASCADE').onDelete('CASCADE')
-    tbl.integer('rest_id').unsigned().notNullable().references('id').inTable('restaurant').onUpdate('CASCADE').onDelete('CASCADE')
+    tbl.foreign('user_id').references('rating.id')
+    tbl.foreign('ft_id').references('food_truck.id')
+    tbl.foreign('rest_id').references('restaurant.id')
 
   })
   

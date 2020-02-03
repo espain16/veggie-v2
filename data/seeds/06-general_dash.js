@@ -1,13 +1,13 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('general_dash').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('general_dash').insert([
+        {rest_id: 2, ft_id:1},
+        {rest_id: 4, ft_id:2},
+        {rest_id: 5, ft_id:3}
       ]);
     });
 };
