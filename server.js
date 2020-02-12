@@ -16,8 +16,8 @@ server.use(express.json());
 
 server.use(cors());
 // server.options("*", cors());
-server.use('/creds',cred)
-// server.use('/',foodTruck)
+server.use('/auth',cred)
+server.use('/',foodTruck)
 server.use('/',restaurant)
-// server.use('/',rate)
+server.use('/',rate)
 module.exports = server;
