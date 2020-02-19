@@ -11,7 +11,9 @@ router.post("/register", async (req, res) => {
   const hash = bcrypt.hashSync(creds.password, 14);
   var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   creds.password = hash;
-
+if(await db.findBy({username}) ){
+  return res.send({ message: "that user name exist" });
+}
   if (!format.test(password)) {
     return res.send({ message: "password requires one special character" });
   }

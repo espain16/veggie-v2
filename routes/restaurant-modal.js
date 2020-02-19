@@ -38,17 +38,3 @@ async function remove_restaurant(id) {
     .del();
 }
 
-async function findBydetail() {
-  return await db("fulltable")
-    .innerJoin("menu_item", "fulltable.menu_id", "menu_item.user_id")
-    .select("*");
-}
-
-function getAllEntries(id) {
-  const entries = db("entries")
-    .join("children", "entries.children_id", "children.id")
-    .join("foods", "entries.food_id", "foods.id")
-    .select("*")
-    .where("children.id", id);
-  return entries;
-}

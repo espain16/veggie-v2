@@ -3,3 +3,10 @@ npm-debug.log
 /node_modules
 node_modules
 truck.sql
+
+
+
+git checkout jason-aviles
+git merge -s ours master
+git checkout master
+git merge jason-aviles
